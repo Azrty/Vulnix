@@ -8,7 +8,7 @@ function clean(text) {
         return text;
 }
 
-var prefix = "v";
+var prefix = "!";
 var token = " ";
 
 client.on("ready", () => {
@@ -24,7 +24,7 @@ client.user.setGame(`vhelp / vnew | ${client.guilds.size} servers`);
 client.on("message", (message) => {
   if (!message.content.startsWith(prefix) || message.author.bot) return;
 
-  if (message.content.toLowerCase().startsWith(prefix + `help`)) {
+  if (message.content.toLowerCase().startsWith(prefix + `ticket help`)) {
     const embed = new Discord.RichEmbed()
     .setTitle(`:mailbox_with_mail: Vulnix Help`)
     .setColor(0xCF40FA)
@@ -40,7 +40,7 @@ client.on("message", (message) => {
     });
 }
 
-if (message.content.toLowerCase().startsWith(prefix + `new`)) {
+if (message.content.toLowerCase().startsWith(prefix + `ticket open`)) {
     const reason = message.content.split(" ").slice(1).join(" ");
     if (!message.guild.roles.exists("name", "Support Team")) return message.channel.send(`This server doesn't have a \`Support Team\` role made, so the ticket won't be opened.\nIf you are an administrator, make one with that name exactly and give it to users that should be able to see tickets.`);
     if (message.guild.channels.exists("name", "ticket-" + message.author.id)) return message.channel.send(`You already have a ticket open.`);
